@@ -38,12 +38,11 @@ public class WordFrequencyGame {
     }
 
     public List<WordInfo> calculateWordFrequency(Map<String, List<WordInfo>> wordInfoListMap) {
-        List<WordInfo> wordInfoList = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> listOfWordInfo : wordInfoListMap.entrySet()) {
-            WordInfo wordInfo = new WordInfo(listOfWordInfo.getKey(), listOfWordInfo.getValue().size());
-            wordInfoList.add(wordInfo);
-        }
-        return wordInfoList;
+        return wordInfoListMap
+                .entrySet()
+                .stream()
+                .map(listOfWordInfo -> new WordInfo(listOfWordInfo.getKey(), listOfWordInfo.getValue().size()))
+                .collect(Collectors.toList());
     }
 
     public boolean isInputOneWord(String sentence) {
