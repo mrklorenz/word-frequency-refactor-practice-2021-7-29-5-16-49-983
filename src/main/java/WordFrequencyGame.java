@@ -11,18 +11,10 @@ public class WordFrequencyGame {
             return sentence + " 1";
         }
         try {
-            //split the input string with 1 to n pieces of spaces
             List<WordInfo> wordInfoList = generateWordInfoList(sentence);
-
-            //get the map for the next step of sizing the same word
             Map<String, List<WordInfo>> wordInfoListMap = getMapOfWordInfoList(wordInfoList);
 
-            List<WordInfo> list = new ArrayList<>();
-            for (Map.Entry<String, List<WordInfo>> entry : wordInfoListMap.entrySet()) {
-                WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
-                list.add(wordInfo);
-            }
-            wordInfoList = list;
+            wordInfoList = calculateWordFrequency(wordInfoListMap);
 
             wordInfoList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
@@ -38,11 +30,19 @@ public class WordFrequencyGame {
 
     }
 
+    public List<WordInfo> calculateWordFrequency(Map<String, List<WordInfo>> wordInfoListMap){
+        List<WordInfo> wordInfoList = new ArrayList<>();
+        for (Map.Entry<String, List<WordInfo>> listOfWordInfo : wordInfoListMap.entrySet()) {
+            WordInfo wordInfo = new WordInfo(listOfWordInfo.getKey(), listOfWordInfo.getValue().size());
+            wordInfoList.add(wordInfo);
+        }
+        return wordInfoList;
+    }
+
 
     private Map<String, List<WordInfo>> getMapOfWordInfoList(List<WordInfo> wordInfoList) {
         Map<String, List<WordInfo>> map = new HashMap<>();
         for (WordInfo wordInfo : wordInfoList) {
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
             if (!map.containsKey(wordInfo.getValue())) {
                 ArrayList arr = new ArrayList<>();
                 arr.add(wordInfo);
@@ -66,7 +66,5 @@ public class WordFrequencyGame {
         }
         return wordInfoList;
     }
-
-
 
 }
