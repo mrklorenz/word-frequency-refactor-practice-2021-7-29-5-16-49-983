@@ -12,13 +12,7 @@ public class WordFrequencyGame {
         }
         try {
             //split the input string with 1 to n pieces of spaces
-            String[] words = sentence.split(WHITE_SPACES);
-
-            List<WordInfo> wordInfoList = new ArrayList<>();
-            for (String word : words) {
-                WordInfo wordInfo = new WordInfo(word, 1);
-                wordInfoList.add(wordInfo);
-            }
+            List<WordInfo> wordInfoList = generateWordInfoList(sentence);
 
             //get the map for the next step of sizing the same word
             Map<String, List<WordInfo>> map = getListMap(wordInfoList);
@@ -39,8 +33,6 @@ public class WordFrequencyGame {
             }
             return joiner.toString();
         } catch (Exception e) {
-
-
             return CALCULATE_ERROR;
         }
 
@@ -59,13 +51,20 @@ public class WordFrequencyGame {
                 map.get(wordInfo.getValue()).add(wordInfo);
             }
         }
-
-
         return map;
     }
 
-    public boolean isInputOneWord(String sentence){
+    public boolean isInputOneWord(String sentence) {
         return sentence.split(WHITE_SPACES).length == 1;
+    }
+
+    public List<WordInfo> generateWordInfoList(String sentence){
+        List<WordInfo> wordInfoList = new ArrayList<>();
+        for (String word : sentence.split(WHITE_SPACES)) {
+            WordInfo wordInfo = new WordInfo(word, 1);
+            wordInfoList.add(wordInfo);
+        }
+        return wordInfoList;
     }
 
 
