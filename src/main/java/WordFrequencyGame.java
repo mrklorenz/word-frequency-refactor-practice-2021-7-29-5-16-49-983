@@ -6,21 +6,21 @@ public class WordFrequencyGame {
     public static final String CALCULATE_ERROR = "Calculate Error";
 
 
-    public String getResult(String inputStr) {
+    public String getResult(String sentence) {
 
 
-        if (inputStr.split(WHITE_SPACES).length == 1) {
-            return inputStr + " 1";
+        if (sentence.split(WHITE_SPACES).length == 1) {
+            return sentence + " 1";
         } else {
 
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split(WHITE_SPACES);
+                String[] words = sentence.split(WHITE_SPACES);
 
                 List<WordInfo> wordInfoList = new ArrayList<>();
-                for (String s : arr) {
-                    WordInfo wordInfo = new WordInfo(s, 1);
+                for (String word : words) {
+                    WordInfo wordInfo = new WordInfo(word, 1);
                     wordInfoList.add(wordInfo);
                 }
 
