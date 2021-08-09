@@ -24,12 +24,12 @@ public class WordFrequencyGame {
     }
 
     public String joinWordInfoList(List<WordInfo> wordInfoList) {
-        StringJoiner joiner = new StringJoiner("\n");
+        StringJoiner result = new StringJoiner("\n");
         for (WordInfo wordInfo : wordInfoList) {
-            String currentWordInfo = wordInfo.getValue() + " " + wordInfo.getWordCount();
-            joiner.add(currentWordInfo);
+            String currentWordInfo = wordInfo.getWordValue() + " " + wordInfo.getWordCount();
+            result.add(currentWordInfo);
         }
-        return joiner.toString();
+        return result.toString();
     }
 
     public void sortWordInfoListByCount(List<WordInfo> wordInfoList) {
@@ -59,16 +59,17 @@ public class WordFrequencyGame {
     }
 
     private Map<String, List<WordInfo>> getMapOfWordInfoList(List<WordInfo> wordInfoList) {
-        Map<String, List<WordInfo>> map = new HashMap<>();
+        Map<String, List<WordInfo>> wordInfoListMap = new HashMap<>();
+
         for (WordInfo wordInfo : wordInfoList) {
-            if (!map.containsKey(wordInfo.getValue())) {
-                ArrayList arr = new ArrayList<>();
-                arr.add(wordInfo);
-                map.put(wordInfo.getValue(), arr);
+            if (!wordInfoListMap.containsKey(wordInfo.getWordValue())) {
+                List<WordInfo> wordInfos = new ArrayList<>();
+                wordInfos.add(wordInfo);
+                wordInfoListMap.put(wordInfo.getWordValue(), wordInfos);
             } else {
-                map.get(wordInfo.getValue()).add(wordInfo);
+                wordInfoListMap.get(wordInfo.getWordValue()).add(wordInfo);
             }
         }
-        return map;
+        return wordInfoListMap;
     }
 }
