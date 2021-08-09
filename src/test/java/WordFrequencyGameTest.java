@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WordFrequencyGameTest {
 
@@ -52,11 +53,29 @@ public class WordFrequencyGameTest {
         validate_Input_words_process_to_expected_word(inputStr, expectResult);
     }
 
+    @Test
+    public void should_throw_null_pointer_exception_when_getResult_given_null_input(){
+        //Given
+        WordFrequencyGame game = new WordFrequencyGame();
+        String inputStr = null;
+
+        assertThrows(NullPointerException.class, () -> game.getResult(inputStr));
+    }
+
+    @Test
+    public void should_return_1_when_get_result_given_empty_string(){
+        //Given
+        WordFrequencyGame game = new WordFrequencyGame();
+        String inputStr = "";
+
+        assertEquals(game.getResult(inputStr), " 1");
+    }
+
     private void validate_Input_words_process_to_expected_word(String inputStr, String expectResult) {
         WordFrequencyGame game = new WordFrequencyGame();
         //When
         String result = game.getResult(inputStr);
         //Then
-        assertThat(result).isEqualTo(expectResult);
+        assertEquals(result, expectResult);
     }
 }

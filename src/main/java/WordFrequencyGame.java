@@ -6,7 +6,6 @@ public class WordFrequencyGame {
     public static final String WHITE_SPACES = "\\s+";
     public static final String CALCULATE_ERROR_MSG = "Calculate Error";
 
-
     public String getResult(String sentence) {
         if (isInputOneWord(sentence)) {
             return sentence + " 1";
@@ -19,7 +18,7 @@ public class WordFrequencyGame {
             sortWordInfoListByCount(wordInfoList);
 
             return joinWordInfoList(wordInfoList);
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return CALCULATE_ERROR_MSG;
         }
     }
