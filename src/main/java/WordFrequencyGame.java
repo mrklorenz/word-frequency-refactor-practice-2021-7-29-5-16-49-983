@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -18,7 +19,7 @@ public class WordFrequencyGame {
             sortWordInfoListByCount(wordInfoList);
 
             return joinWordInfoList(wordInfoList);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return CALCULATE_ERROR_MSG;
         }
     }
@@ -50,12 +51,8 @@ public class WordFrequencyGame {
     }
 
     public List<WordInfo> generateWordInfoList(String sentence) {
-        List<WordInfo> wordInfoList = new ArrayList<>();
-        for (String word : sentence.split(WHITE_SPACES)) {
-            WordInfo wordInfo = new WordInfo(word, 1);
-            wordInfoList.add(wordInfo);
-        }
-        return wordInfoList;
+        return Arrays.stream(sentence.split(WHITE_SPACES))
+                .map(word -> new WordInfo(word, 1)).collect(Collectors.toList());
     }
 
     private Map<String, List<WordInfo>> getMapOfWordInfoList(List<WordInfo> wordInfoList) {
