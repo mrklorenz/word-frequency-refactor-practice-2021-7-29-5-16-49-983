@@ -15,8 +15,7 @@ public class WordFrequencyGame {
             Map<String, List<WordInfo>> wordInfoListMap = getMapOfWordInfoList(wordInfoList);
 
             wordInfoList = calculateWordFrequency(wordInfoListMap);
-
-            wordInfoList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+            sortWordInfoListByCount(wordInfoList);
 
             StringJoiner joiner = new StringJoiner("\n");
             for (WordInfo w : wordInfoList) {
@@ -28,6 +27,10 @@ public class WordFrequencyGame {
             return CALCULATE_ERROR;
         }
 
+    }
+
+    public void sortWordInfoListByCount(List<WordInfo> wordInfoList){
+        wordInfoList.sort((firstWord, nextWord) -> nextWord.getWordCount() - firstWord.getWordCount());
     }
 
     public List<WordInfo> calculateWordFrequency(Map<String, List<WordInfo>> wordInfoListMap){
